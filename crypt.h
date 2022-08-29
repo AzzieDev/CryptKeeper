@@ -8,7 +8,7 @@ using namespace std;
 void modeChecker(string moderCheck);
 void shiftCipher();
 void showModeList();
-string stringUppercase(string input);
+void stringUppercase(string &input);
 string cleanSymbols(string input);
 
 class crypt {

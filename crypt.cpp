@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "crypt.h"
 
 using namespace std;
@@ -15,6 +16,7 @@ int main() {
 		cout << "Enter a mode, or help to list all modes" << endl;
 		cin >> moder;
 		if (moder != "") {
+			stringUppercase(moder);
 			modeChecker(moder);
 			moder = "";
 		}
@@ -48,10 +50,9 @@ void shiftCipher() {
 	//handle
 }
 
-//intended to convert any passed stream to uppercase form
-string stringUppercase(string input) {
-	string output = "";
-	return output;
+//convert any passed string to uppercase form
+void stringUppercase(string &input) {
+	transform(input.begin(), input.end(), input.begin(), [](unsigned char c){ return toupper(c); });
 }
 
 //intended to purge unwanted symbols from a string
@@ -60,6 +61,3 @@ string cleanSymbols(string input) {
 	string output = "";
 	return output;
 }
-
-
-
