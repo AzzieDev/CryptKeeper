@@ -57,12 +57,31 @@ void shiftCipher() {
 	//brute force
 	if (shift == 0) {
 		cout << "Brute force of all possible combinations of shifts for your message:" << endl;
-		for (int i = 0; i < 25; i++) {
-
+		for (int i = 0; i < 26; i++) {
+			shiftHelper(message, i);
 		}
 	} else {
 		//mod 26 of shift
+		shiftHelper(message, shift%26);
 	}
+}
+
+//shift helper function to perform specific shift
+void shiftHelper(string theMessage, int theShift) {
+	for (char i : theMessage) {
+		//if space then skip
+		if (!isspace(i)) {
+			char currentChar = i + theShift;
+			//handle loop from Z to A
+			if (currentChar > 90) {
+				currentChar = (currentChar - 26);
+			}
+			cout << currentChar;
+		} else {
+			cout << " ";
+		}
+	}
+	cout << endl;
 }
 
 //convert any passed string to uppercase form
