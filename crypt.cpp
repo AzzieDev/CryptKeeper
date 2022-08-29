@@ -17,6 +17,7 @@ int main() {
 		cin >> moder;
 		if (!moder.empty()) {
 			stringUppercase(moder);
+			cleanSymbols(moder);
 			modeChecker(moder);
 			moder = "";
 		}
@@ -39,25 +40,46 @@ void showModeList() {
 }
 
 void shiftCipher() {
+	cout << "Welcome to Shift/Caesar Cipher mode!" << endl;
+	cout << "Rules: alpha non-numeric messages only. Spaces are allowed." << endl;
 	cout << "What is your message you want to encode/decode?" << endl;
 	string message;
 	cin >> message;
+	stringUppercase(message);
+	cleanSymbols(message);
 	//choice of brute force or manual shift
 	cout << "What would your shift be?" << endl;
-	cout << "Enter 0 for brute force of all possibilities:";
+	cout << "Enter 0 for brute force of all possibilities," << endl;;
+	cout << "Enter a positive or negative integer for a specific shift:" << endl;
 	int shift;
 	cin >> shift;
-	//handle
+	//handle shifts
+	//brute force
+	if (shift == 0) {
+		cout << "Brute force of all possible combinations of shifts for your message:" << endl;
+		for (int i = 0; i < 25; i++) {
+
+		}
+	} else {
+		//mod 26 of shift
+	}
 }
 
 //convert any passed string to uppercase form
 void stringUppercase(string &input) {
-	transform(input.begin(), input.end(), input.begin(), [](unsigned char c){ return toupper(c); });
+	transform(input.begin(), input.end(), input.begin(), [](unsigned char c){
+		return toupper(c);
+	});
 }
 
 //intended to purge unwanted symbols from a string
 //this will not purge the space symbol
-string cleanSymbols(string input) {
+void cleanSymbols(string &input) {
 	string output = "";
-	return output;
+	for (char i : input) {
+		if (isalpha(i) || isspace(i)) {
+			output.push_back(i);
+		}
+	}
+	input = output;
 }

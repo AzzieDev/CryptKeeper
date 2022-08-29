@@ -9,7 +9,7 @@ void modeChecker(const string& moderCheck);
 void shiftCipher();
 void showModeList();
 void stringUppercase(string &input);
-string cleanSymbols(string input);
+void cleanSymbols(string &input);
 
 class crypt {
 
