@@ -5,7 +5,7 @@
 #ifndef CRYPTKEEPER_CRYPT_H
 #define CRYPTKEEPER_CRYPT_H
 using namespace std;
-void modeChecker(string moderCheck);
+void modeChecker(const string& moderCheck);
 void shiftCipher();
 void showModeList();
 void stringUppercase(string &input);

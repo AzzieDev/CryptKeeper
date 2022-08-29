@@ -11,11 +11,11 @@ using namespace std;
 //intro function
 int main() {
 	cout << "Welcome to the Cryptkeeper" << endl;
-	string moder = "";
-	while (moder == "") {
+	string moder;
+	while (moder.empty()) {
 		cout << "Enter a mode, or help to list all modes" << endl;
 		cin >> moder;
-		if (moder != "") {
+		if (!moder.empty()) {
 			stringUppercase(moder);
 			modeChecker(moder);
 			moder = "";
@@ -24,7 +24,7 @@ int main() {
 }
 
 //handles modes submitted by user
-void modeChecker(string moderCheck) {
+void modeChecker(const string& moderCheck) {
 	//if-else structure because switch-case is not suitable
 	if (moderCheck == "SHIFT" || moderCheck == "CAESAR") {
 		shiftCipher();
@@ -40,7 +40,7 @@ void showModeList() {
 
 void shiftCipher() {
 	cout << "What is your message you want to encode/decode?" << endl;
-	string message = "";
+	string message;
 	cin >> message;
 	//choice of brute force or manual shift
 	cout << "What would your shift be?" << endl;
