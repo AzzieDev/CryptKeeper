@@ -10,7 +10,7 @@ void shiftCipher();
 void showModeList();
 void stringUppercase(string &input);
 void cleanSymbols(string &input);
-void shiftHelper(string theMessage, int theShift);
+void shiftHelper(const string& theMessage, int theShift);
 
 
 class crypt {

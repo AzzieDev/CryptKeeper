@@ -43,13 +43,15 @@ void shiftCipher() {
 	cout << "Welcome to Shift/Caesar Cipher mode!" << endl;
 	cout << "Rules: alpha non-numeric messages only. Spaces are allowed." << endl;
 	cout << "What is your message you want to encode/decode?" << endl;
+	//clear the cin buffer
+	cin.ignore();
 	string message;
-	cin >> message;
+	getline(cin, message);
 	stringUppercase(message);
 	cleanSymbols(message);
 	//choice of brute force or manual shift
 	cout << "What would your shift be?" << endl;
-	cout << "Enter 0 for brute force of all possibilities," << endl;;
+	cout << "Enter 0 for brute force of all possibilities," << endl;
 	cout << "Enter a positive or negative integer for a specific shift:" << endl;
 	int shift;
 	cin >> shift;
@@ -67,14 +69,14 @@ void shiftCipher() {
 }
 
 //shift helper function to perform specific shift
-void shiftHelper(string theMessage, int theShift) {
+void shiftHelper(const string& theMessage, int theShift) {
 	for (char i : theMessage) {
 		//if space then skip
 		if (!isspace(i)) {
-			char currentChar = i + theShift;
+			char currentChar = {static_cast<char>(i + theShift)};
 			//handle loop from Z to A
 			if (currentChar > 90) {
-				currentChar = (currentChar - 26);
+				currentChar = {static_cast<char>(currentChar - 26)};
 			}
 			cout << currentChar;
 		} else {
@@ -94,7 +96,7 @@ void stringUppercase(string &input) {
 //intended to purge unwanted symbols from a string
 //this will not purge the space symbol
 void cleanSymbols(string &input) {
-	string output = "";
+	string output;
 	for (char i : input) {
 		if (isalpha(i) || isspace(i)) {
 			output.push_back(i);
