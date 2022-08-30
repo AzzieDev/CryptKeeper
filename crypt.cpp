@@ -13,7 +13,7 @@ int main() {
 	cout << "Welcome to the Cryptkeeper" << endl;
 	string moder;
 	while (moder.empty()) {
-		cout << "Enter a mode, or help to list all modes" << endl;
+		cout << "Enter a mode, or help to list all modes, quit/exit" << endl;
 		cin >> moder;
 		if (!moder.empty()) {
 			stringUppercase(moder);
@@ -27,7 +27,9 @@ int main() {
 //handles modes submitted by user
 void modeChecker(const string& moderCheck) {
 	//if-else structure because switch-case is not suitable
-	if (moderCheck == "SHIFT" || moderCheck == "CAESAR") {
+	if (moderCheck == "EXIT" || moderCheck == "QUIT") {
+		exit(0);
+	} else if (moderCheck == "SHIFT" || moderCheck == "CAESAR") {
 		shiftCipher();
 	} else {
 		showModeList();
@@ -36,6 +38,7 @@ void modeChecker(const string& moderCheck) {
 
 void showModeList() {
 	cout << "HELP - show this list" << endl;
+	cout << "EXIT or QUIT - terminate the program" << endl;
 	cout << "SHIFT or CAESAR - shift cipher with optional brute force" << endl;
 }
 
