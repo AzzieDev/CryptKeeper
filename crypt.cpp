@@ -6,6 +6,8 @@
 #include <algorithm>
 #include "crypt.h"
 
+void euclidAlgo();
+
 using namespace std;
 
 //intro function
@@ -25,14 +27,19 @@ int main() {
 }
 
 //handles modes submitted by user
-void modeChecker(const string& moderCheck) {
+void modeChecker(const string &moderCheck) {
 	//if-else structure because switch-case is not suitable
 	if (moderCheck == "EXIT" || moderCheck == "QUIT") {
 		exit(0);
 	} else if (moderCheck == "SHIFT" || moderCheck == "CAESAR") {
 		shiftCipher();
+//	} else if (moderCheck == "VIGENERE" || moderCheck == "SQUARE") {
+//		vigCipher();
+	} else if (moderCheck == "GCD" || moderCheck == "EUCLID") {
+		euclidAlgo();
 	} else {
 		showModeList();
+
 	}
 }
 
@@ -40,8 +47,12 @@ void showModeList() {
 	cout << "HELP - show this list" << endl;
 	cout << "EXIT or QUIT - terminate the program" << endl;
 	cout << "SHIFT or CAESAR - shift cipher with optional brute force" << endl;
+	//cout << "VIGENERE or SQUARE - shift cipher using a key word" << endl;
+	cout << "GCD or EUCLID - solve for greatest common denominator" << endl;
+//	cout << "EGCD or EUCLID - solve for extended euclid values" << endl;
 }
 
+// procedure for a simple shift cipher
 void shiftCipher() {
 	cout << "Welcome to Shift/Caesar Cipher mode!" << endl;
 	cout << "Rules: alpha non-numeric messages only. Spaces are allowed." << endl;
@@ -67,13 +78,52 @@ void shiftCipher() {
 		}
 	} else {
 		//mod 26 of shift
-		shiftHelper(message, shift%26);
+		shiftHelper(message, shift % 26);
 	}
 }
 
+// procedure for a vigenere cipher
+void vigCipher() {
+	cout << "Welcome to Vigenere Cipher mode!" << endl;
+	cout << "Rules: alpha non-numeric messages only. Spaces are allowed." << endl;
+	cout << "What is your message you want to encode/decode?" << endl;
+	//clear the cin buffer and retrieve message
+	cin.ignore();
+	string message;
+	getline(cin, message);
+	stringUppercase(message);
+	cleanSymbols(message);
+	//retrieve key
+	cout << "What is your key word or phrase?" << endl;
+	//might add brute force later with dictionary attack
+	//cout << "Enter 0 for brute force of all possibilities," << endl;
+	//clear the cin buffer and retrieve message
+	cin.ignore();
+	string keyword;
+	getline(cin, keyword);
+	stringUppercase(keyword);
+	cleanSymbolsSpace(keyword);
+
+	//data is processed, call the decryption
+
+
+
+
+	//brute force
+//	if (shift == 0) {
+//		cout << "Brute force of all possible combinations of shifts for your message:" << endl;
+//		for (int i = 0; i < 26; i++) {
+//			shiftHelper(message, i);
+//		}
+//	} else {
+//		//mod 26 of shift
+//		shiftHelper(message, shift%26);
+//	}
+}
+
 //shift helper function to perform specific shift
-void shiftHelper(const string& theMessage, int theShift) {
-	for (char i : theMessage) {
+void shiftHelper(const string &theMessage, int theShift) {
+	for (char i: theMessage) {
 		//if space then skip
 		if (!isspace(i)) {
 			char currentChar = {static_cast<char>(i + theShift)};
@@ -91,7 +141,7 @@ void shiftHelper(const string& theMessage, int theShift) {
 
 //convert any passed string to uppercase form
 void stringUppercase(string &input) {
-	transform(input.begin(), input.end(), input.begin(), [](unsigned char c){
+	transform(input.begin(), input.end(), input.begin(), [](unsigned char c) {
 		return toupper(c);
 	});
 }
@@ -100,10 +150,47 @@ void stringUppercase(string &input) {
 //this will not purge the space symbol
 void cleanSymbols(string &input) {
 	string output;
-	for (char i : input) {
+	for (char i: input) {
 		if (isalpha(i) || isspace(i)) {
 			output.push_back(i);
 		}
 	}
 	input = output;
+}
+
+//intended to purge any non-alpha symbols from a string
+//this will include whitespace characters like space and tab
+void cleanSymbolsSpace(string &input) {
+	string output;
+	for (char i: input) {
+		if (isalpha(i)) {
+			output.push_back(i);
+		}
+	}
+	input = output;
+}
+
+//procedure that will process the euclidian algorithm including extended
+void euclidAlgo() {
+	cout << "Welcome to Euclid GCD mode!" << endl;
+	cout << "Enter the first integer:" << endl;
+	int a;
+	cin >> a;
+	cout << "Enter the second integer:" << endl;
+	int b;
+	cin >> b;
+	cout << "---------" << endl;
+	int d;
+	d = gcd(a, b);
+	cout << "Greatest Common Denominator = " << d << endl;
+}
+
+//basic gcd using euclidian algorithm
+int gcd(int a, int b) {
+	if (b == 0) {
+		return a;
+	} else {
+		cout << a << " = " << b << "(" << (a / b) << ") + " << (a % b) << endl;
+		return gcd(b, (a % b));
+	}
 }
