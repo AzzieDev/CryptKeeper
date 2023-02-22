@@ -16,6 +16,7 @@ void shiftHelper(const string& theMessage, int theShift);
 void vigHelper(const string& theMessage, const string& theKeyWord);
 void euclidAlgo();
 int gcd(int a, int b);
+int gcdExtended(int a, int b, int *x, int *y);
 
 
 

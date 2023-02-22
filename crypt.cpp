@@ -182,7 +182,10 @@ void euclidAlgo() {
 	cout << "---------" << endl;
 	int d;
 	d = gcd(a, b);
-	cout << "Greatest Common Denominator = " << d << endl;
+	cout << "GCD(" << a << ", " << b << ") = " << d << endl;
+	int x, y;
+	int g = gcdExtended(a, b, &x, &y);
+	cout << "EGCD(" << a << " * " << x << ") + (" << b << " * " << y << ") = " << g << endl;
 }
 
 //basic gcd using euclidian algorithm
@@ -193,4 +196,25 @@ int gcd(int a, int b) {
 		cout << a << " = " << b << "(" << (a / b) << ") + " << (a % b) << endl;
 		return gcd(b, (a % b));
 	}
+}
+
+// Function for extended Euclidean Algorithm
+int gcdExtended(int a, int b, int *x, int *y) {
+	// Base Case
+	if (a == 0) {
+		*x = 0;
+		*y = 1;
+		return b;
+	}
+
+	int x1, y1; // To store results of recursive call
+	int gcd = gcdExtended(b % a, a, &x1, &y1);
+
+	// Update x and y using results of
+	// recursive call
+	cout << *x << " = " << y1 << " - (" << b << " / " << a << ") * " << x1 << endl;
+	*x = y1 - (b / a) * x1;
+	*y = x1;
+
+	return gcd;
 }
