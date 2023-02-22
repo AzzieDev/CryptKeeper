@@ -4,3 +4,4 @@
 ### Modes:
 * Help menu
 * Shift/Caesar Cipher
+* Euclidean Algorithm (and Extended)
