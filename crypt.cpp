@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <boost/multiprecision/cpp_int.hpp>
+
 #include "crypt.h"
 
 void euclidAlgo();
@@ -174,32 +176,38 @@ void cleanSymbolsSpace(string &input) {
 void euclidAlgo() {
 	cout << "Welcome to Euclid GCD mode!" << endl;
 	cout << "Enter the first integer:" << endl;
-	int a;
+	cpp_int a;
 	cin >> a;
 	cout << "Enter the second integer:" << endl;
-	int b;
+	cpp_int b;
 	cin >> b;
 	cout << "---------" << endl;
-	int d;
+	cpp_int d;
 	d = gcd(a, b);
 	cout << "GCD(" << a << ", " << b << ") = " << d << endl;
-	int x, y;
-	int g = gcdExtended(a, b, &x, &y);
+	cpp_int x, y;
+	cpp_int g = gcdExtended(a, b, &x, &y);
 	cout << "EGCD(" << a << " * " << x << ") + (" << b << " * " << y << ") = " << g << endl;
 }
 
 //basic gcd using euclidian algorithm
-int gcd(int a, int b) {
-	if (b == 0) {
-		return a;
-	} else {
-		cout << a << " = " << b << "(" << (a / b) << ") + " << (a % b) << endl;
-		return gcd(b, (a % b));
+cpp_int gcd(cpp_int a, cpp_int b) {
+	cout << "Computing GCD(" << a << ", " << b << "):\n";
+	cpp_int r, q;
+	while (b != 0) {
+		q = a / b;
+		r = a % b;
+		cout << a << " = " << b << " * " << q << " + " << r << "\n";
+		a = b;
+		b = r;
 	}
+	cout << "GCD is " << a << "\n";
+	return a;
 }
 
+
 // Function for extended Euclidean Algorithm
-int gcdExtended(int a, int b, int *x, int *y) {
+cpp_int gcdExtended(cpp_int a, cpp_int b, cpp_int *x, cpp_int *y) {
 	// Base Case
 	if (a == 0) {
 		*x = 0;
@@ -207,14 +215,17 @@ int gcdExtended(int a, int b, int *x, int *y) {
 		return b;
 	}
 
-	int x1, y1; // To store results of recursive call
-	int gcd = gcdExtended(b % a, a, &x1, &y1);
+	cpp_int x1, y1; // To store results of recursive call
+	cpp_int gcd = gcdExtended(b % a, a, &x1, &y1);
 
 	// Update x and y using results of
 	// recursive call
-	cout << *x << " = " << y1 << " - (" << b << " / " << a << ") * " << x1 << endl;
 	*x = y1 - (b / a) * x1;
 	*y = x1;
 
+	// Print out gcd = a*x + b*y
+	cout << gcd << " = " << a << "*" << *x << " + " << b << "*" << *y << endl;
+
 	return gcd;
 }
+
