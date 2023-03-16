@@ -9,6 +9,7 @@
 
 using namespace std;
 using namespace boost::multiprecision;
+
 void modeChecker(const string &moderCheck);
 
 void shiftCipher();
@@ -29,10 +30,11 @@ void vigHelper(const string &theMessage, const string &theKeyWord);
 
 void euclidAlgo();
 
-cpp_int  gcd(cpp_int  a, cpp_int b);
+cpp_int gcd(cpp_int a, cpp_int b);
 
-cpp_int  gcdExtended(cpp_int  a, cpp_int  b, cpp_int  *x, cpp_int *y);
+cpp_int gcdExtended(cpp_int a, cpp_int b, cpp_int *x, cpp_int *y);
 
+void modularExp();
 
 class crypt {
 
