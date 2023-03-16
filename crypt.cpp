@@ -262,19 +262,41 @@ void modularExp() {
 	for (int i = 0; i < binary.size(); i++) {
 		cout << " " << binary[i] << "  | ";
 	}
-	cout << endl << "| ";
-	cpp_int c;
+	cout << endl;
+	cout << "And for each bit, find a remainder in a table:" << endl;
+	cout << "| ";
+	cpp_int c = 0;
 	for (int i = 0; i < binary.size(); i++) {
 		if (i == 0) {
 			c = a;
 		} else if (binary[i] == 0) {
-			c = pow(c, 2) % m;
+			c = c * c % m;
 		} else {
-			c = pow(c, 2) % m;
-			c = (c*a) % m;
+			c = (c * c * a) % m;
 		}
 		cout << " " << c << "  | ";
 	}
-	std::cout << std::endl;
+	cout << endl << endl;
+	c = 0;
+	for (int i = 0; i < binary.size(); i++) {
+		if (i == 0) {
+			c = a;
+			cout << "First we start with " << a << endl;
+		} else if (binary[i] == 0) {
+			cout << "The current bit is 0, so we square: " << endl;
+			cout << c << "^2 (mod " << m << ") = ";
+			c = pow(c, 2) % m;
+			cout << c << endl;
+		} else {
+			cout << "The current bit is 1, so we square and multiply by A: " << endl;
+			cout << c << " * " << c << " * " << a << " (mod " << m << ") = ";
+			c = (c * c * a )% m;
+			cout << c << endl;
+		}
+	}
+	cout << "The final remainder is: " << c << endl;
+	cout << endl;
+	cout << a << " ^ " << b << " (mod " << m << ") = " << c << endl;
+	cout << endl;
 
 }
