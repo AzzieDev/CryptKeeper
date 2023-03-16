@@ -39,6 +39,8 @@ void modeChecker(const string &moderCheck) {
 //		vigCipher();
 	} else if (moderCheck == "GCD" || moderCheck == "EUCLID") {
 		euclidAlgo();
+	} else if (moderCheck == "POWERMOD" || moderCheck == "MODEXP") {
+		modularExp();
 	} else {
 		showModeList();
 
@@ -51,6 +53,8 @@ void showModeList() {
 	cout << "SHIFT or CAESAR - shift cipher with optional brute force" << endl;
 	//cout << "VIGENERE or SQUARE - shift cipher using a key word" << endl;
 	cout << "GCD or EUCLID - solve for greatest common denominator" << endl;
+	cout << "POWERMOD or MODEXP - solve using modular exponentiation" << endl;
+
 //	cout << "EGCD or EUCLID - solve for extended euclid values" << endl;
 }
 
@@ -229,3 +233,17 @@ cpp_int gcdExtended(cpp_int a, cpp_int b, cpp_int *x, cpp_int *y) {
 	return gcd;
 }
 
+//main sequence for PowerMod operations
+void modularExp() {
+	cout << "Welcome to PowerMod mode!" << endl;
+	cout << "Enter the first integer A (the base number):" << endl;
+	cpp_int a;
+	cin >> a;
+	cout << "Enter the second integer B (the exponent):" << endl;
+	cpp_int b;
+	cin >> b;
+	cout << "Enter the third integer M (the modulo):" << endl;
+	cpp_int m;
+	cin >> m;
+
+}
