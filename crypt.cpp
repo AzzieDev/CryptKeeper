@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/multiprecision/cpp_int.hpp>
+#include <vector>
 
 #include "crypt.h"
 
@@ -245,5 +246,35 @@ void modularExp() {
 	cout << "Enter the third integer M (the modulo):" << endl;
 	cpp_int m;
 	cin >> m;
+	cout << "Now we take the binary form of B:" << endl;
+	// Get the number of bits needed to represent b
+	int num_bits = 0;
+	cpp_int temp = b;
+	while (temp != 0) {
+		num_bits++;
+		temp >>= 1;
+	}
+	std::vector<cpp_int> binary(num_bits);
+	for (int i = num_bits - 1; i >= 0; i--) {
+		binary[num_bits - i - 1] = (b >> i) & 1;
+	}
+	cout << "| ";
+	for (int i = 0; i < binary.size(); i++) {
+		cout << " " << binary[i] << "  | ";
+	}
+	cout << endl << "| ";
+	cpp_int c;
+	for (int i = 0; i < binary.size(); i++) {
+		if (i == 0) {
+			c = a;
+		} else if (binary[i] == 0) {
+			c = pow(c, 2) % m;
+		} else {
+			c = pow(c, 2) % m;
+			c = (c*a) % m;
+		}
+		cout << " " << c << "  | ";
+	}
+	std::cout << std::endl;
 
 }
