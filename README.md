@@ -8,4 +8,4 @@ The bigint functions use the Boost Multiprecision library. The Boost Math packag
 * Help menu
 * Shift/Caesar Cipher
 * Euclidean Algorithm (and Extended)
-* Modular Exponentiation
+* Modular Exponentiation (PowerMod)

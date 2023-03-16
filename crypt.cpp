@@ -240,23 +240,23 @@ void modularExp() {
 	cout << "Enter the first integer A (the base number):" << endl;
 	cpp_int a;
 	cin >> a;
-	cout << "Enter the second integer B (the exponent):" << endl;
-	cpp_int b;
-	cin >> b;
+	cout << "Enter the second integer K (the exponent):" << endl;
+	cpp_int k;
+	cin >> k;
 	cout << "Enter the third integer M (the modulo):" << endl;
 	cpp_int m;
 	cin >> m;
 	cout << "Now we take the binary form of B:" << endl;
 	// Get the number of bits needed to represent b
 	int num_bits = 0;
-	cpp_int temp = b;
+	cpp_int temp = k;
 	while (temp != 0) {
 		num_bits++;
 		temp >>= 1;
 	}
 	std::vector<cpp_int> binary(num_bits);
 	for (int i = num_bits - 1; i >= 0; i--) {
-		binary[num_bits - i - 1] = (b >> i) & 1;
+		binary[num_bits - i - 1] = (k >> i) & 1;
 	}
 	cout << "| ";
 	for (int i = 0; i < binary.size(); i++) {
@@ -296,7 +296,7 @@ void modularExp() {
 	}
 	cout << "The final remainder is: " << c << endl;
 	cout << endl;
-	cout << a << " ^ " << b << " (mod " << m << ") = " << c << endl;
+	cout << a << " ^ " << k << " (mod " << m << ") = " << c << endl;
 	cout << endl;
 
 }
