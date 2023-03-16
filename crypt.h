@@ -36,6 +36,10 @@ cpp_int gcdExtended(cpp_int a, cpp_int b, cpp_int *x, cpp_int *y);
 
 void modularExp();
 
+void eulerHelper();
+
+cpp_int phi(cpp_int n);
+
 class crypt {
 
 };

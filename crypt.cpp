@@ -42,6 +42,8 @@ void modeChecker(const string &moderCheck) {
 		euclidAlgo();
 	} else if (moderCheck == "POWERMOD" || moderCheck == "MODEXP") {
 		modularExp();
+	} else if (moderCheck == "PHI" || moderCheck == "EULER") {
+		eulerHelper();
 	} else {
 		showModeList();
 
@@ -54,7 +56,8 @@ void showModeList() {
 	cout << "SHIFT or CAESAR - shift cipher with optional brute force" << endl;
 	//cout << "VIGENERE or SQUARE - shift cipher using a key word" << endl;
 	cout << "GCD or EUCLID - solve for greatest common denominator" << endl;
-	cout << "POWERMOD or MODEXP - solve using modular exponentiation" << endl;
+	cout << "POWERMOD or MODEXP - solve modular exponentiation" << endl;
+	cout << "EULER or PHI - compute Euler's Totient Function" << endl;
 
 //	cout << "EGCD or EUCLID - solve for extended euclid values" << endl;
 }
@@ -290,7 +293,7 @@ void modularExp() {
 		} else {
 			cout << "The current bit is 1, so we square and multiply by A: " << endl;
 			cout << c << " * " << c << " * " << a << " (mod " << m << ") = ";
-			c = (c * c * a )% m;
+			c = (c * c * a) % m;
 			cout << c << endl;
 		}
 	}
@@ -299,4 +302,51 @@ void modularExp() {
 	cout << a << " ^ " << k << " (mod " << m << ") = " << c << endl;
 	cout << endl;
 
+}
+
+//helper for phi(n)
+void eulerHelper() {
+	cout << "Welcome to Euler's Totient Function mode!" << endl;
+//	cout << "Enter 'n' for integer, '!' for factorial:" << endl;
+//	char choice;
+//	cin >> choice;
+//	if (choice == 'n') {
+	cout << "Enter an integer N:" << endl;
+	cpp_int n;
+	cin >> n;
+	cout << "\u03A6(" << n << ") = " << phi(n) << endl;
+	//}
+}
+
+//compute Euler's Totient Function
+cpp_int phi(cpp_int n) {
+	// Base case: if n is 1, return 1
+	if (n == 1) {
+		return 1;
+	}
+
+	// Initialize result to n
+	cpp_int result = n;
+
+	// Check for factors of n up to the square root of n
+	for (cpp_int i = 2; i * i <= n; i++) {
+		// If i is a factor of n, remove all factors of i from n
+		if (n % i == 0) {
+			while (n % i == 0) {
+				n /= i;
+			}
+
+			// Update result to account for i not being relatively prime to n
+			result -= result / i;
+		}
+	}
+
+	// If n is still greater than 1, it must be a prime factor
+	// so update result accordingly
+	if (n > 1) {
+		result -= result / n;
+	}
+
+	// Return the final value of result
+	return result;
 }
