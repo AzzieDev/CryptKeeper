@@ -1,10 +1,22 @@
-# cmake_minimum_required(VERSION <specify CMake version here>)
+cmake_minimum_required(VERSION 3.0)
+
 project(Cryptkeeper)
 
-set(CMAKE_CXX_STANDARD 14)
+#for POSIX: use
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
+
+
+set(CMAKE_BUILD_TYPE Release)
+
 
 include_directories(.)
 
 add_executable(Cryptkeeper
         crypt.cpp
         crypt.h)
+
+#for Windows, using boost 1.81.0 in the below path, uncomment
+#include_directories("C:/Program Files/Boost/boost_1_81_0/")
+#set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /NODEFAULTLIB:MSVCRT")
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+
