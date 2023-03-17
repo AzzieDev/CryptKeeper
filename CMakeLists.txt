@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(cryptkeeper)
 
-# C++ standard libraries bundled
+# C++ standard libraries bundled on POSIX
 #set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 
 set(CMAKE_BUILD_TYPE Release)
