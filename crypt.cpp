@@ -249,7 +249,7 @@ void modularExp() {
 	cout << "Enter the third integer M (the modulo):" << endl;
 	cpp_int m;
 	cin >> m;
-	cout << "Now we take the binary form of B:" << endl;
+	cout << "Now we take the binary form of K:" << endl;
 	// Get the number of bits needed to represent b
 	int num_bits = 0;
 	cpp_int temp = k;
