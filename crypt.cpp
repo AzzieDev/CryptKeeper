@@ -40,6 +40,8 @@ void modeChecker(const string &moderCheck) {
 //		vigCipher();
 	} else if (moderCheck == "GCD" || moderCheck == "EUCLID") {
 		euclidAlgo();
+	} else if (moderCheck == "BIG" || moderCheck == "OPERATOR") {
+		bigMaths();
 	} else if (moderCheck == "POWERMOD" || moderCheck == "MODEXP") {
 		modularExp();
 	} else if (moderCheck == "PHI" || moderCheck == "EULER") {
@@ -56,6 +58,7 @@ void showModeList() {
 	cout << "SHIFT or CAESAR - shift cipher with optional brute force" << endl;
 	//cout << "VIGENERE or SQUARE - shift cipher using a key word" << endl;
 	cout << "GCD or EUCLID - solve for greatest common denominator" << endl;
+	cout << "BIG or OPERATOR - allow large calculations" << endl;
 	cout << "POWERMOD or MODEXP - solve modular exponentiation" << endl;
 	cout << "EULER or PHI - compute Euler's Totient Function" << endl;
 
@@ -349,4 +352,40 @@ cpp_int phi(cpp_int n) {
 
 	// Return the final value of result
 	return result;
+}
+
+//function for handling large integers
+void bigMaths() {
+	cout << "Welcome to Big Math mode!" << endl;
+	cout << "Enter an integer A:" << endl;
+	cpp_int a;
+	cin >> a;
+	cout << "Enter an integer B:" << endl;
+	cpp_int b;
+	cin >> b;
+
+	cpp_int adder = a + b;
+	cpp_int subB = a - b;
+	cpp_int subA = b - a;
+	cpp_int multer = a * b;
+
+	cpp_int modB = a % b;
+	cpp_int divA = (a - modB) / b;
+
+	cpp_int modA = b % a;
+	cpp_int divB = (b - modA) / a;
+
+//	cpp_int expA = boost::multiprecision::pow(a, b.convert_to<int>());
+
+//	cpp_int expB = boost::multiprecision::pow(a, b.convert_to<int>());
+
+
+	cout << a << " + " << b << " = " << adder << endl;
+	cout << a << "  - " << b << " = " << subB << endl;
+	cout << b << "  - " << a << " = " << subA << endl;
+	cout << a << "  * " << b << " = " << multer << endl;
+	cout << a << "  / " << b << " = " << divA << " R" << modB << endl;
+	cout << b << "  / " << a << " = " << divB << " R" << modA << endl;
+	//cout << a << "  ^ " << b << " = " << expA << endl;
+//	cout << b << "  ^ " << a << " = " << expB << endl;
 }
