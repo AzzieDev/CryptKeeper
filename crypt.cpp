@@ -317,7 +317,7 @@ void eulerHelper() {
 	cout << "Enter an integer N:" << endl;
 	cpp_int n;
 	cin >> n;
-	cout << "\u03A6(" << n << ") = " << phi(n) << endl;
+	cout << "Phi \u03A6(" << n << ") = " << phi(n) << endl;
 	//}
 }
 

@@ -8,5 +8,6 @@ The bigint functions use the Boost Multiprecision library. The Boost Math packag
 * Help menu
 * Shift/Caesar Cipher
 * Euclidean Algorithm (and Extended)
+* Big Integer Calculations
 * Modular Exponentiation (PowerMod)
 * Euler's Totient Function &Phi;(N)
