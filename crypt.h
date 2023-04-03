@@ -5,6 +5,7 @@
 #ifndef CRYPTKEEPER_CRYPT_H
 #define CRYPTKEEPER_CRYPT_H
 
+#include <set>
 #include <boost/multiprecision/cpp_int.hpp>
 
 using namespace std;
