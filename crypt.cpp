@@ -2,6 +2,7 @@
 // Created by Azriel on 8/29/2022.
 //
 #include <iostream>
+#include <cmath>
 #include <string>
 #include <algorithm>
 #include <boost/multiprecision/cpp_int.hpp>
@@ -375,10 +376,14 @@ void bigMaths() {
 	cpp_int modA = b % a;
 	cpp_int divB = (b - modA) / a;
 
-//	cpp_int expA = boost::multiprecision::pow(a, b.convert_to<int>());
-
-//	cpp_int expB = boost::multiprecision::pow(a, b.convert_to<int>());
-
+	cpp_int expA = 1;
+	for (cpp_int i = 0; i < b; ++i) {
+		expA *= a;
+	}
+	cpp_int expB = 1;
+	for (cpp_int i = 0; i < a; ++i) {
+		expB *= b;
+	}
 
 	cout << a << " + " << b << " = " << adder << endl;
 	cout << a << "  - " << b << " = " << subB << endl;
@@ -386,6 +391,6 @@ void bigMaths() {
 	cout << a << "  * " << b << " = " << multer << endl;
 	cout << a << "  / " << b << " = " << divA << " R" << modB << endl;
 	cout << b << "  / " << a << " = " << divB << " R" << modA << endl;
-	//cout << a << "  ^ " << b << " = " << expA << endl;
-//	cout << b << "  ^ " << a << " = " << expB << endl;
+	cout << a << "  ^ " << b << " = " << expA << endl;
+	cout << b << "  ^ " << a << " = " << expB << endl;
 }
