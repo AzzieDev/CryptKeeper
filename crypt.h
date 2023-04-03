@@ -40,7 +40,13 @@ void modularExp();
 
 void eulerHelper();
 
-cpp_int phi(cpp_int n);
+set<cpp_int> factorialPrimes(cpp_int n);
+
+set<cpp_int> primeFactors(cpp_int n);
+
+cpp_int factorial(cpp_int n);
+
+cpp_int phi(cpp_int n, set<cpp_int> primeFactors);
 
 class crypt {
 

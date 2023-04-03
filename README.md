@@ -1,4 +1,4 @@
-# Cryptkeeper
+# CryptKeeper
 ## This program is intended for encryption and decryption, including brute force attacks.
 
 The bigint functions use the Boost Multiprecision library. The Boost Math package can be installed by
@@ -12,4 +12,4 @@ The [complete package can be downloaded](https://www.boost.org/users/history/ver
 * Euclidean Algorithm (and Extended)
 * Big Integer Calculations
 * Modular Exponentiation (PowerMod)
-* Euler's Totient Function &Phi;(N)
+* Euler's Totient Function &Phi;(N) (including factorials)

@@ -2,7 +2,6 @@
 // Created by Azriel on 8/29/2022.
 //
 #include <iostream>
-#include <cmath>
 #include <string>
 #include <algorithm>
 #include <boost/multiprecision/cpp_int.hpp>
@@ -10,13 +9,11 @@
 
 #include "crypt.h"
 
-void euclidAlgo();
-
 using namespace std;
 
 //intro function
 int main() {
-	cout << "Welcome to the Cryptkeeper" << endl;
+	cout << "Welcome to the CryptKeeper" << endl;
 	string moder;
 	while (moder.empty()) {
 		cout << "Enter a mode, or help to list all modes, quit/exit" << endl;
@@ -266,14 +263,14 @@ void modularExp() {
 		binary[num_bits - i - 1] = (k >> i) & 1;
 	}
 	cout << "| ";
-	for (int i = 0; i < binary.size(); i++) {
-		cout << " " << binary[i] << "  | ";
+	for (const auto &i: binary) {
+		cout << " " << i << "  | ";
 	}
 	cout << endl;
 	cout << "And for each bit, find a remainder in a table:" << endl;
 	cout << "| ";
 	cpp_int c = 0;
-	for (int i = 0; i < binary.size(); i++) {
+	for (size_t i = 0; i < binary.size(); i++) {
 		if (i == 0) {
 			c = a;
 		} else if (binary[i] == 0) {
@@ -285,7 +282,7 @@ void modularExp() {
 	}
 	cout << endl << endl;
 	c = 0;
-	for (int i = 0; i < binary.size(); i++) {
+	for (size_t i = 0; i < binary.size(); i++) {
 		if (i == 0) {
 			c = a;
 			cout << "First we start with " << a << endl;
@@ -311,47 +308,105 @@ void modularExp() {
 //helper for phi(n)
 void eulerHelper() {
 	cout << "Welcome to Euler's Totient Function mode!" << endl;
-//	cout << "Enter 'n' for integer, '!' for factorial:" << endl;
-//	char choice;
-//	cin >> choice;
-//	if (choice == 'n') {
-	cout << "Enter an integer N:" << endl;
+	cout << "Enter 'n' for integer, '!' for factorial:" << endl;
+	char choice;
 	cpp_int n;
-	cin >> n;
-	cout << "Phi \u03A6(" << n << ") = " << phi(n) << endl;
-	//}
+	set <cpp_int> primeFactorSet;
+	cin >> choice;
+	if (choice == 'n') {
+		cout << "Enter an integer N:" << endl;
+		cin >> n;
+		primeFactorSet = primeFactors(n);
+	} else if (choice == '!') {
+		cout << "Enter an factorial integer without the !:" << endl;
+		cin >> n;
+		primeFactorSet = factorialPrimes(n);
+		n = factorial(n);
+	} else {
+		main();
+	}
+	if (!primeFactorSet.empty()) {
+		cout << "Prime factors: ";
+		for (const auto &factor: primeFactorSet) {
+			cout << factor << ", ";
+		}
+		cout << endl;
+		cout << "Phi \u03A6(" << n << ") = " << phi(n, primeFactorSet) << endl;
+	}
 }
 
-//compute Euler's Totient Function
-cpp_int phi(cpp_int n) {
-	// Base case: if n is 1, return 1
-	if (n == 1) {
-		return 1;
+//finds the set of prime factors for a factorial
+set <cpp_int> factorialPrimes(cpp_int n) {
+	set <cpp_int> primes;
+	// Check each number from 2 to n for primality
+	for (cpp_int i = 2; i <= n; i++) {
+		bool isPrime = true;
+		// Check if i is divisible by any number from 2 to sqrt(i)
+		for (cpp_int j = 2; j <= sqrt(i); j++) {
+			if (i % j == 0) {
+				isPrime = false;
+				break;
+			}
+		}
+		// If i is prime, add it to the set of primes
+		if (isPrime) {
+			primes.insert(i);
+		}
 	}
+	return primes;
+}
 
-	// Initialize result to n
-	cpp_int result = n;
+
+//retrieve the prime factors for Euler's Totient function
+set <cpp_int> primeFactors(cpp_int n) {
+	set <cpp_int> factors;
 
 	// Check for factors of n up to the square root of n
 	for (cpp_int i = 2; i * i <= n; i++) {
 		// If i is a factor of n, remove all factors of i from n
 		if (n % i == 0) {
 			while (n % i == 0) {
+				factors.insert(i);
 				n /= i;
 			}
-
-			// Update result to account for i not being relatively prime to n
-			result -= result / i;
 		}
 	}
 
-	// If n is still greater than 1, it must be a prime factor
-	// so update result accordingly
+	// If n is still greater than 1, then it must be a prime factor
 	if (n > 1) {
-		result -= result / n;
+		factors.insert(n);
 	}
 
-	// Return the final value of result
+	// Remove non-prime factors from the set
+	set <cpp_int> primeFactors;
+	for (const auto &factor: factors) {
+		bool is_prime = true;
+		for (cpp_int i = 2; i * i <= factor; i++) {
+			if (factor % i == 0) {
+				is_prime = false;
+				break;
+			}
+		}
+		if (is_prime) {
+			primeFactors.insert(factor);
+		}
+	}
+
+	return primeFactors;
+}
+
+//compute Euler's Totient Function
+cpp_int phi(cpp_int n, set <cpp_int> primeFactors) {
+	// Base case: if n is 1, return 1
+	if (n == 1) {
+		return 1;
+	}
+
+	// Compute phi using the formula
+	cpp_int result = n;
+	for (const auto &factor: primeFactors) {
+		result -= result / factor;
+	}
 	return result;
 }
 
@@ -393,4 +448,14 @@ void bigMaths() {
 	cout << b << "  / " << a << " = " << divB << " R" << modA << endl;
 	cout << a << "  ^ " << b << " = " << expA << endl;
 	cout << b << "  ^ " << a << " = " << expB << endl;
+}
+
+//calculates the factorial of a given number n
+cpp_int factorial(cpp_int n) {
+	cpp_int result = 1;
+	// Multiply result by each integer from 1 to n
+	for (cpp_int i = 1; i <= n; i++) {
+		result *= i;
+	}
+	return result;
 }
