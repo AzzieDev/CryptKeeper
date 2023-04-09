@@ -44,7 +44,7 @@ void modeChecker(const string &moderCheck) {
 		modularExp();
 	} else if (moderCheck == "PHI" || moderCheck == "EULER") {
 		eulerHelper();
-	} else {
+	}  else {
 		showModeList();
 
 	}
@@ -311,7 +311,7 @@ void eulerHelper() {
 	cout << "Enter 'n' for integer, '!' for factorial:" << endl;
 	char choice;
 	cpp_int n;
-	set <cpp_int> primeFactorSet;
+	set<cpp_int> primeFactorSet;
 	cin >> choice;
 	if (choice == 'n') {
 		cout << "Enter an integer N:" << endl;
@@ -336,8 +336,8 @@ void eulerHelper() {
 }
 
 //finds the set of prime factors for a factorial
-set <cpp_int> factorialPrimes(cpp_int n) {
-	set <cpp_int> primes;
+set<cpp_int> factorialPrimes(cpp_int n) {
+	set<cpp_int> primes;
 	// Check each number from 2 to n for primality
 	for (cpp_int i = 2; i <= n; i++) {
 		bool isPrime = true;
@@ -358,8 +358,8 @@ set <cpp_int> factorialPrimes(cpp_int n) {
 
 
 //retrieve the prime factors for Euler's Totient function
-set <cpp_int> primeFactors(cpp_int n) {
-	set <cpp_int> factors;
+set<cpp_int> primeFactors(cpp_int n) {
+	set<cpp_int> factors;
 
 	// Check for factors of n up to the square root of n
 	for (cpp_int i = 2; i * i <= n; i++) {
@@ -378,7 +378,7 @@ set <cpp_int> primeFactors(cpp_int n) {
 	}
 
 	// Remove non-prime factors from the set
-	set <cpp_int> primeFactors;
+	set<cpp_int> primeFactors;
 	for (const auto &factor: factors) {
 		bool is_prime = true;
 		for (cpp_int i = 2; i * i <= factor; i++) {
@@ -396,7 +396,7 @@ set <cpp_int> primeFactors(cpp_int n) {
 }
 
 //compute Euler's Totient Function
-cpp_int phi(cpp_int n, set <cpp_int> primeFactors) {
+cpp_int phi(cpp_int n, set<cpp_int> primeFactors) {
 	// Base case: if n is 1, return 1
 	if (n == 1) {
 		return 1;
@@ -431,6 +431,15 @@ void bigMaths() {
 	cpp_int modA = b % a;
 	cpp_int divB = (b - modA) / a;
 
+
+	cout << a << " + " << b << " = " << adder << endl;
+	cout << a << " - " << b << " = " << subB << endl;
+	cout << b << " - " << a << " = " << subA << endl;
+	cout << a << " * " << b << " = " << multer << endl;
+	cout << a << " / " << b << " = " << divA << " R" << modB << endl;
+	cout << b << " / " << a << " = " << divB << " R" << modA << endl;
+
+	//exponent calculations seem to still fail
 	cpp_int expA = 1;
 	for (cpp_int i = 0; i < b; ++i) {
 		expA *= a;
@@ -439,15 +448,8 @@ void bigMaths() {
 	for (cpp_int i = 0; i < a; ++i) {
 		expB *= b;
 	}
-
-	cout << a << " + " << b << " = " << adder << endl;
-	cout << a << "  - " << b << " = " << subB << endl;
-	cout << b << "  - " << a << " = " << subA << endl;
-	cout << a << "  * " << b << " = " << multer << endl;
-	cout << a << "  / " << b << " = " << divA << " R" << modB << endl;
-	cout << b << "  / " << a << " = " << divB << " R" << modA << endl;
-	cout << a << "  ^ " << b << " = " << expA << endl;
-	cout << b << "  ^ " << a << " = " << expB << endl;
+	cout << a << " ^ " << b << " = " << expA << endl;
+	cout << b << " ^ " << a << " = " << expB << endl;
 }
 
 //calculates the factorial of a given number n
