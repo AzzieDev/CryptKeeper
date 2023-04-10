@@ -44,7 +44,7 @@ void modeChecker(const string &moderCheck) {
 		modularExp();
 	} else if (moderCheck == "PHI" || moderCheck == "EULER") {
 		eulerHelper();
-	}  else {
+	} else {
 		showModeList();
 
 	}
@@ -423,7 +423,6 @@ void bigMaths() {
 	cpp_int adder = a + b;
 	cpp_int subB = a - b;
 	cpp_int subA = b - a;
-	cpp_int multer = a * b;
 
 	cpp_int modB = a % b;
 	cpp_int divA = (a - modB) / b;
@@ -435,21 +434,31 @@ void bigMaths() {
 	cout << a << " + " << b << " = " << adder << endl;
 	cout << a << " - " << b << " = " << subB << endl;
 	cout << b << " - " << a << " = " << subA << endl;
-	cout << a << " * " << b << " = " << multer << endl;
 	cout << a << " / " << b << " = " << divA << " R" << modB << endl;
 	cout << b << " / " << a << " = " << divB << " R" << modA << endl;
+	string input;
 
-	//exponent calculations seem to still fail
-	cpp_int expA = 1;
-	for (cpp_int i = 0; i < b; ++i) {
-		expA *= a;
+	cout << "Do you want to compute multiples? y/n" << endl;
+	cin >> input;
+	if (input[0] == 'y' || input[0] == 'Y') {
+		cpp_int multer = a * b;
+		cout << a << " * " << b << " = " << multer << endl;
+		cout << "Do you want to compute exponents?" << endl;
+		cin >> input;
+		if (input[0] == 'y' || input[0] == 'Y') {
+			//exponent calculations seem to still fail
+			cpp_int expA = 1;
+			for (cpp_int i = 0; i < b; ++i) {
+				expA *= a;
+			}
+			cpp_int expB = 1;
+			for (cpp_int i = 0; i < a; ++i) {
+				expB *= b;
+			}
+			cout << a << " ^ " << b << " = " << expA << endl;
+			cout << b << " ^ " << a << " = " << expB << endl;
+		}
 	}
-	cpp_int expB = 1;
-	for (cpp_int i = 0; i < a; ++i) {
-		expB *= b;
-	}
-	cout << a << " ^ " << b << " = " << expA << endl;
-	cout << b << " ^ " << a << " = " << expB << endl;
 }
 
 //calculates the factorial of a given number n
